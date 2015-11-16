@@ -13,6 +13,21 @@ char* itoa(int val,int base)
 	return &buf[i+1];
 }
 
+void chand_coord(char _x_coord char _y_coord)
+{
+	*x_coord=iota(_x_coord,10);
+	*y_coord=itoa(_y_coord,10);
+	return ;
+}
+
+char get_x_coord()
+{
+	return system(xdotool getmousecursor x);
+}
+char get_y_coord()
+{
+	return system(xdotool getmousecursor y);
+}
 int main()
 {
 	int i = 0;
@@ -34,7 +49,7 @@ int main()
 		strcat(inst, y_coord);
 
 		printf("%s\n", inst);
-		
+
 		//execlp("xdotool","xdotool","mousemove",temp,"300",NULL);
 		system(inst);
 		usleep(100);
