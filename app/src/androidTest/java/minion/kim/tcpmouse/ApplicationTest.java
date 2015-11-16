@@ -1,4 +1,4 @@
-package kim.minion.tcpmouse;
+package minion.kim.tcpmouse;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;
