@@ -1,11 +1,15 @@
-#include <Stdlib.h>
 #include <gtk/gtk.h>
+
+void callback(GtkWidget *widget, gpointer data)
+{
+	g_print ("Hello again - %s was pressed \n",(char *) data);
+}
 
 int main (int argc, char *argv[])
 {
 	GtkWidget *button;
 	GtkWidget *window;
-	GtkWidget *box1;
+	GtkWidget *label;
 
 	gtk_init(&argc, &argv);  // initialize
 
@@ -23,13 +27,14 @@ int main (int argc, char *argv[])
 
 	//create a new button
 	button = gtk_button_new();
-	//
 	gtk_widget_set_size_request(button, 50,50);
-	
+	gtk_signal_connect(GTK_OBject (button), "clicked", GTK_SIGNAL_FUNC(callback), (gpointer) "Connection");
+
 	label = gtk_lael_new("Hi!");
 
 	// plot the label onto the main window
 	gtk_container_add(GTK_CONTAINER(window), label);
+	gtk_container_add(GTK_CONTAINER(window), button);
 
 	//window and label, are visible
 	gtk_widget_show_all(window);
