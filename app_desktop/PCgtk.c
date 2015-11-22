@@ -1,45 +1,37 @@
+#include <stdio.h>
+#include <stdlib.h>
 #include <gtk/gtk.h>
 
-void callback(GtkWidget *widget, gpointer data)
+static void enter_callback (GtkWidget *widget, GtkWidget *entry)
 {
-	g_print ("Hello again - %s was pressed \n",(char *) data);
+	const gchar *entry_text;
+	entry_text = gtk_entry_get_text (GTK_ENTRY(entry));
+	printf("Entry contents : %s\n", entry_text);
 }
 
 int main (int argc, char *argv[])
 {
-	GtkWidget *button;
-	GtkWidget *window;
-	GtkWidget *label;
+    GtkWidget *window;
+    GtkWidget *vbox, *hbox;
+    GtkWidget *entry;
+    GtkWidget *button;
+    GtkWidget *check;
+    gint tmp_pos;
 
-	gtk_init(&argc, &argv);  // initialize
+    gtk_init (&argc, &argv);
 
-	//create the main, top level window
-	window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+    /* create a new window */
+    window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
+    gtk_widget_set_size_request (GTK_WIDGET (window), 200, 100);
+    gtk_window_set_title (GTK_WINDOW (window), "GTK Entry");
+    g_signal_connect (window, "destroy",G_CALLBACK (gtk_main_quit), NULL);
+    g_signal_connect_swapped (window, "delete-event",G_CALLBACK (gtk_widget_destroy), window);
 
-	//give it the title
-	gtk_window_set_title(GTK_WINDOW(window), "PC-Android Connection");
+   
+    
+    gtk_widget_show (window);
 
-	g_signal_connect(G_OBJECT(window), "destroy", G_CALLBACK(gtk_main_quit),NULL);
+    gtk_main();
 
-
-	gtk_container_set_border_width (GTK_CONTAINER(window), 10);
-	gtk_widget_realize(window);
-
-	//create a new button
-	button = gtk_button_new();
-	gtk_widget_set_size_request(button, 50,50);
-	gtk_signal_connect(GTK_OBject (button), "clicked", GTK_SIGNAL_FUNC(callback), (gpointer) "Connection");
-
-	label = gtk_lael_new("Hi!");
-
-	// plot the label onto the main window
-	gtk_container_add(GTK_CONTAINER(window), label);
-	gtk_container_add(GTK_CONTAINER(window), button);
-
-	//window and label, are visible
-	gtk_widget_show_all(window);
-
-	gtk_main();
-
-	return 0;
+    return 0;
 }

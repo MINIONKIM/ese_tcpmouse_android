@@ -1,4 +1,3 @@
-#include <Stdlib.h>
 #include <gtk/gtk.h>
 
 void callback(GtkWidget *widget, gpointer data)
