@@ -24,7 +24,7 @@ int main (int argc, char *argv[])
     GtkWidget *window;
     GtkWidget *vbox, *hbox;
     GtkWidget *entry;
-    GtkWidget *button;
+    GtkWidget *entry2;
     GtkWidget *check;
     gint tmp_pos;
 
@@ -32,32 +32,44 @@ int main (int argc, char *argv[])
 
     /* create a new window */
     window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
-    gtk_widget_set_size_request (GTK_WIDGET (window), 200, 100);
-    gtk_window_set_title (GTK_WINDOW (window), "GTK Entry");
-    g_signal_connect (window, "destroy",
-                      G_CALLBACK (gtk_main_quit), NULL);
-    g_signal_connect_swapped (window, "delete-event",
-                              G_CALLBACK (gtk_widget_destroy), 
-                              window);
+    gtk_widget_set_size_request (GTK_WIDGET (window), 400, 300);
+    gtk_window_set_title (GTK_WINDOW (window), "PC GTK Entry");
+    g_signal_connect (window, "destroy",G_CALLBACK (gtk_main_quit), NULL);
+    g_signal_connect_swapped (window, "delete-event",G_CALLBACK (gtk_widget_destroy), window);
 
+    //vbox
     vbox = gtk_vbox_new (FALSE, 0);
     gtk_container_add (GTK_CONTAINER (window), vbox);
     gtk_widget_show (vbox);
 
+    //entry ..	
     entry = gtk_entry_new ();
-    gtk_entry_set_max_length (GTK_ENTRY (entry), 50);
+    gtk_entry_set_max_length (GTK_ENTRY (entry), 100);
     g_signal_connect (entry, "activate",G_CALLBACK (enter_callback), entry);
-    gtk_entry_set_text (GTK_ENTRY (entry), "hello");
+    gtk_entry_set_text (GTK_ENTRY (entry), "Put your IP address");
+
     tmp_pos = GTK_ENTRY (entry)->text_length;
-    gtk_editable_insert_text (GTK_EDITABLE (entry), " world", -1, &tmp_pos);
     gtk_editable_select_region (GTK_EDITABLE (entry),0, GTK_ENTRY (entry)->text_length);
     gtk_box_pack_start (GTK_BOX (vbox), entry, TRUE, TRUE, 0);
     gtk_widget_show (entry);
 
+   //entry2 ..	
+    entry2 = gtk_entry_new ();
+    gtk_entry_set_max_length (GTK_ENTRY (entry2), 100);
+    g_signal_connect (entry2, "activate",G_CALLBACK (enter_callback), entry2);
+    gtk_entry_set_text (GTK_ENTRY (entry2), "Put your Port number");
+
+    tmp_pos = GTK_ENTRY (entry2)->text_length;
+    gtk_editable_select_region (GTK_EDITABLE (entry2),0, GTK_ENTRY (entry2)->text_length);
+    gtk_box_pack_start (GTK_BOX (vbox), entry2, TRUE, TRUE, 0);
+    gtk_widget_show (entry2);
+
+    // hbox
     hbox = gtk_hbox_new (FALSE, 0);
     gtk_container_add (GTK_CONTAINER (vbox), hbox);
     gtk_widget_show (hbox);
-                                  
+       
+    //check button                           
     check = gtk_check_button_new_with_label ("Editable");
     gtk_box_pack_start (GTK_BOX (hbox), check, TRUE, TRUE, 0);
     g_signal_connect (check, "toggled", G_CALLBACK (entry_toggle_editable), entry);
@@ -66,19 +78,11 @@ int main (int argc, char *argv[])
     
     check = gtk_check_button_new_with_label ("Visible");
     gtk_box_pack_start (GTK_BOX (hbox), check, TRUE, TRUE, 0);
-    g_signal_connect (check, "toggled",
-	              G_CALLBACK (entry_toggle_visibility), entry);
+    g_signal_connect (check, "toggled",G_CALLBACK (entry_toggle_visibility), entry);
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (check), TRUE);
     gtk_widget_show (check);
                                    
-    button = gtk_button_new_from_stock (GTK_STOCK_CLOSE);
-    g_signal_connect_swapped (button, "clicked",
-			      G_CALLBACK (gtk_widget_destroy),
-			      window);
-    gtk_box_pack_start (GTK_BOX (vbox), button, TRUE, TRUE, 0);
-    gtk_widget_set_can_default (button, TRUE);
-    gtk_widget_grab_default (button);
-    gtk_widget_show (button);
+    
     
     gtk_widget_show (window);
 
