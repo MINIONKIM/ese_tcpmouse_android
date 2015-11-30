@@ -123,9 +123,9 @@ int main (int argc, char *argv[])
     gtk_signal_connect (GTK_OBJECT (button), "clicked", 
 		GTK_SIGNAL_FUNC (button_callback), NULL);
 
-    gtk_signal_connect_object (GTK_OBJECT (button), "clicked", 
-		GTK_SIGNAL_FUNC (gtk_widget_destory), 
-		GTK_OBJECT (window));
+    //gtk_signal_connect_object (GTK_OBJECT (button), "clicked", 
+	//	GTK_SIGNAL_FUNC (gtk_widget_destory), 
+	//	GTK_OBJECT (window));
     
     gtk_container_add (GTK_CONTAINER (window), button);
     //gtk_box_pack_start (GTK_BOX (vbox), button, TRUE, TRUE, 0);
