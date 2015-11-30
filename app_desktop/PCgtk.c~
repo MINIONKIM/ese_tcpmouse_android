@@ -88,24 +88,23 @@ int main (int argc, char *argv[])
     gtk_box_pack_start (GTK_BOX (vbox), entry2, TRUE, TRUE, 0);
     gtk_widget_show (entry2);
 
- 
-       
     //button ...
     button = gtk_button_new();
     gtk_signal_connect (GTK_OBJECT (button), "clicked", 
 		GTK_SIGNAL_FUNC (button_callback), (gpointer) "Connect");
 
-    /* This calls our box creating function */
-    box = xpm_label_box("info.xpm", "Connect");
-    gtk_widget_show (box);
-
-    gtk_container_add (GTK_CONTAINER (button), box);
+    //gtk_container_add (GTK_CONTAINER (button), vbox);
+    gtk_box_pack_start (GTK_BOX (vbox), button, TRUE, TRUE, 0);
 
     gtk_widget_show(button);
 
     gtk_container_add (GTK_CONTAINER (window), button);
 
-    
+    // hbox
+    hbox = gtk_hbox_new (FALSE, 0);
+    gtk_container_add (GTK_CONTAINER (vbox), hbox);
+    gtk_widget_show (hbox);
+
     gtk_widget_show (window);
 
     gtk_main();

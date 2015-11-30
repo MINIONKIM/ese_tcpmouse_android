@@ -47,6 +47,7 @@ int main (int argc, char *argv[])
     GtkWidget *entry2;
     GtkWidget *button;
     GtkWidget *box;
+    GtkWidget *timeLabel;
     gint tmp_pos;
 
     gtk_init (&argc, &argv);
@@ -88,13 +89,17 @@ int main (int argc, char *argv[])
     gtk_box_pack_start (GTK_BOX (vbox), entry2, TRUE, TRUE, 0);
     gtk_widget_show (entry2);
 
+    // timeLabel
+    timeLabel = gtk_label_new("IP address : ");
+    gtk_widget_set_size_request(timeLabel, 50, 50);
+    gtk_container_add(GTK_CONTAINER(vbox), timeLabel);
     //button ...
     button = gtk_button_new();
     gtk_signal_connect (GTK_OBJECT (button), "clicked", 
 		GTK_SIGNAL_FUNC (button_callback), (gpointer) "Connect");
 
     //gtk_container_add (GTK_CONTAINER (button), vbox);
-    gtk_box_pack_start (GTK_BOX (vbox), entry2, TRUE, TRUE, 0);
+    gtk_box_pack_start (GTK_BOX (vbox), button, TRUE, TRUE, 0);
 
     gtk_widget_show(button);
 
