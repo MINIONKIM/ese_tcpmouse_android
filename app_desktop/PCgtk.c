@@ -41,27 +41,51 @@ static void button_callback(GtkWidget *widget, gpointer data)
 
 int main (int argc, char *argv[])
 {
+    /* this variable will store a pointer to the window object. */
     GtkWidget *window;
-    GtkWidget *vbox, *hbox;
+    GtkWidget *vbox;
+    /* this will store a text entry */
     GtkWidget *entry;
-    GtkWidget *entry2;
+    GtkWidget *entry2;   
+    /* this will store push buttons */
     GtkWidget *button;
-    GtkWidget *box;
+    /* this will store a horizontal box*/
+    GtkWidget *hbox;
+
     GtkWidget *timeLabel;
     gint tmp_pos;
 
+//////////////////////////////////////////////////////////////////////
+
+    /* this is called in all GTK applications. Arguments 
+	are parsed from the command line and are returned
+ 	to the application. */
     gtk_init (&argc, &argv);
 
     /* create a new window */
     window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
-    gtk_widget_set_size_request (GTK_WIDGET (window), 400, 300);
+    //gtk_widget_set_size_request (GTK_WIDGET (window), 400, 400);
     gtk_window_set_title (GTK_WINDOW (window), "PC GTK Entry");
-    g_signal_connect (window, "destroy",G_CALLBACK (gtk_main_quit), NULL);
+    gtk_container_set_border_width(GTK_CONTAINER (window), 5);
+
+    /* When the window is given the "delete_event" signal (usually by
+	the "close" opthion), we ask it to call the delete_event() function. 
+	*/
     g_signal_connect_swapped (window, "delete-event",
 				G_CALLBACK (gtk_widget_destroy), window);
+    /* Here we connect the "destory" event to a signal handler.
+ 	This event occurs when we call gtk_widget_destroy() on the window, 
+	or if we return FALSE in the "delete_event" callback. */
+    g_signal_connect (window, "destroy",G_CALLBACK (gtk_main_quit), NULL);
+
+
+    // hbox
+    hbox = gtk_hbox_new (TRUE, 20);
+    gtk_container_add (GTK_CONTAINER (window), hbox);
+    gtk_widget_show (hbox);
 
     //vbox
-    vbox = gtk_vbox_new (FALSE, 0);
+    vbox = gtk_vbox_new (TRUE, 20);
     gtk_container_add (GTK_CONTAINER (window), vbox);
     gtk_widget_show (vbox);
 
@@ -93,22 +117,21 @@ int main (int argc, char *argv[])
     timeLabel = gtk_label_new("IP address : ");
     gtk_widget_set_size_request(timeLabel, 50, 50);
     gtk_container_add(GTK_CONTAINER(vbox), timeLabel);
+    
     //button ...
-    button = gtk_button_new();
+    button = gtk_button_new_with_label("Connect");
     gtk_signal_connect (GTK_OBJECT (button), "clicked", 
-		GTK_SIGNAL_FUNC (button_callback), (gpointer) "Connect");
+		GTK_SIGNAL_FUNC (button_callback), NULL);
 
-    //gtk_container_add (GTK_CONTAINER (button), vbox);
-    gtk_box_pack_start (GTK_BOX (vbox), button, TRUE, TRUE, 0);
+    //gtk_signal_connect_object (GTK_OBJECT (button), "clicked", 
+	//	GTK_SIGNAL_FUNC (gtk_widget_destory), 
+	//	GTK_OBJECT (window));
+    
+    gtk_container_add (GTK_CONTAINER (window), button);
+    //gtk_box_pack_start (GTK_BOX (vbox), button, TRUE, TRUE, 0);
 
     gtk_widget_show(button);
 
-    gtk_container_add (GTK_CONTAINER (window), button);
-
-    // hbox
-    hbox = gtk_hbox_new (FALSE, 0);
-    gtk_container_add (GTK_CONTAINER (vbox), hbox);
-    gtk_widget_show (hbox);
 
     gtk_widget_show (window);
 
