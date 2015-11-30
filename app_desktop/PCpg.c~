@@ -15,34 +15,9 @@ char* itoa(int val,int base)
 	return &buf[i+1];
 }
 
-void MoveMouse(int x,int y)
-{
-	char* instruction = "xdotool mousemove_relative ";
-	char* x_coord;
-	char* y_coord;
-	char* sp=" ";
-	char inst[50];
 
-	x_coord=itoa(x,10);
-	y_coord=itoa(x,10);
-
-	strcat(inst, instruction);
-	strcat(inst, x_coord);
-	strcat(inst, sp);
-	strcat(inst, y_coord);
-	printf("%s\n", inst);
-	usleep(100);
-	system(inst);
-	//memset(inst, NULL, sizeof(inst));
-}
 int main()
 {
-
-	MoveMouse(10,10);
-
-
-
-/*
 	int i = 0;
 //	char *temp;
 	char* instruction = "xdotool mousemove_relative ";
@@ -50,7 +25,7 @@ int main()
 	char inst[27];
 	
 	//printf("%s \n",instruction);
-	
+
 	for(i=0;i<500;i++)
 	{
 		//strcpy(temp,itoa(i,10));
@@ -68,8 +43,6 @@ int main()
 		usleep(100);
 		memset(inst, NULL, sizeof(inst));
 	}
-	*/
-
 	return 0;
 
 }
