@@ -39,10 +39,10 @@ int main()
         int readbytes;
        
         //read socket
-        if(readbytes = read(ssock, buf, MAXBUF) <= 0)
-        {       perror("Failed to read socket");
-               exit(1);
-        }
+//        if(readbytes = read(ssock, buf, MAXBUF) <= 0)
+  //      {       perror("Failed to read socket");
+    //           exit(1);
+      //  }
        
         char writebuf[MAXBUF] = "Im client! Hi~ server~";
  

@@ -8,8 +8,45 @@
  
 #define MAXBUF 256
  
+void parsing(char* buf,char* x,char* y,char* z)
+{
+	int i=0;
+	int idx=0;
+	
+	for(i=0;i<10;i++)
+	{
+		x[i]=0;
+		y[i]=0;
+		z[i]=0;
+	}
+	i=0;
+	while(buf[idx]!=' ')
+	{
+		x[i]=buf[idx];
+		i++;
+		idx++;
+	}
+	i=0;
+	idx++;
+	while(buf[idx]!=' ')
+	{
+		y[i]=buf[idx];
+		i++;
+		idx++;
+	}
+	i=0;
+	idx++;
+	while(buf[idx]!=' ')
+	{
+		z[i]=buf[idx];
+		i++;
+		idx++;
+	}
+	printf("pa----- %s %s %s \n ",x,y,z);
+}
 int main()
 {
+	int time = 0;
         int ssock, csock;
         int clen;
         struct sockaddr_in client_addr, server_addr;
@@ -46,18 +83,21 @@ int main()
         memset(&readbuf, 0, MAXBUF);
        
         int i=0;
+	int idx=0;
+	char x[10]={0,};
+	char y[10]={0,};
+	char z[10]={0,};
         while(1)
         {     csock = accept(ssock, (struct sockaddr *)&client_addr, &clen);
                i++;
-              printf("\ncome here\n");
-               //if(write(csock, buf, MAXBUF) <= 0)
+	         //if(write(csock, buf, MAXBUF) <= 0)
                  //      perror("Writing error : ");
                       
                if(read(csock, readbuf, MAXBUF) < 0)
                        perror("Reading error : ");
                       
                fprintf(stderr, "[client] %s\n", readbuf);
-                      
+               parsing(readbuf,x,y,z);
                close(csock);
        
         }
