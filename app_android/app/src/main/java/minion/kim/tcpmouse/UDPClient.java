@@ -33,7 +33,6 @@ public class UDPClient
             outStream.writeFloat(yaw);
             outStream.writeFloat(pitch);
             outStream.writeFloat(roll);
-
             outStream.close();
 
             buf = arrStream.toByteArray();
