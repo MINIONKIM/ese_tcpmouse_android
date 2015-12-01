@@ -27,7 +27,7 @@ int main()
         memset(&server_addr, 0, sizeof(clen));
         server_addr.sin_family = AF_INET;
         server_addr.sin_addr.s_addr = inet_addr("192.168.178.128");
-        server_addr.sin_port = htons(3317);
+        server_addr.sin_port = htons(9999);
        
         //connect to setted address
         if(connect(ssock, (struct sockaddr *)&server_addr, clen) < 0 )
