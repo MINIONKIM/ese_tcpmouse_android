@@ -129,7 +129,7 @@ void parsing(char* buf,char* x,char* y,char* z)
 
 }
 
-void sacledata(char* arr)
+void scaledata(char* arr)
 {
 	int int_arr;
 	int_arr = _atoi(arr);
