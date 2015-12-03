@@ -184,7 +184,10 @@ int main (int argc, char *argv[])
    gtk_signal_connect (GTK_OBJECT (button2), "clicked", 
 			GTK_SIGNAL_FUNC (on_button2_clicked), NULL);
 
-   // gtk_widget_show(button2);
+	// test
+   gtk_widget_set_sensitive(button2, FALSE);
+
+    gtk_widget_show(button2);
 
    // button3
    button3 = gtk_button_new_with_label("Quit");  
