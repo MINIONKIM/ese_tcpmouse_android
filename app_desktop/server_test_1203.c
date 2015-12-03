@@ -21,23 +21,30 @@ void cleararr(char buf[])
 }
 void _itoa(int val, int base, char *arr)
 {
-	static char buf[32] = {0,};
+	char buf[32] = {0,};
 	int i=30;
 	char result[10] = {0,};
 	int k = 0;
 
+	if(val ==0)
+	{
+		arr[0]='0';
+		arr[1]=0;
+		return;
+	}
 	if(val < 0)
 	{
 		val = val*-1;
 		result[k] = '-';
 		k++;
 	}
-
+	//printf("----------> original : %d \n",val);
 	for(;val && i; --i, val /= base)
 	{
 		buf[i] = "0123456789abcdef"[val % base];
+		//if(buf[i]!=0)printf("%d : %c\n",i,buf[i]);
 	}
-	
+	//for(i=0;i<32;i++)printf("%d : %c\n",i,buf[i]);
 	for(i=0; i<32; i++)
 	{
 		if(buf[i] != 0)
@@ -48,9 +55,10 @@ void _itoa(int val, int base, char *arr)
 		}
 		
 	}
-	printf("ascii value : %s \n", result);
+	//printf("ascii value : %s \n", result);
 	cleararr(arr);
 	
+
 	for(i=0;i<strlen(result);i++) 
 	{
 	arr[i]=result[i];
@@ -83,7 +91,8 @@ int _atoi(char* str)
 			radix /= 10;
 		}
 	}
-	return result/100;
+	
+	return -result/50;
 }
 void parsing(char* buf,char* x,char* y,char* z)
 {
@@ -127,6 +136,24 @@ void sacledata(char* arr)
 	//printf("------------>%d\n",int_arr);
 	_itoa(int_arr,10,arr);
 }
+
+void MoveMouse(char* x,char* y)
+{
+	char* instruction = "xdotool mousemove_relative -- ";
+	char* sp=" ";
+	int i;
+	char inst[50]={0,};
+	printf("z : %s , x : %s \n",x,y);
+	strcat(inst, instruction);
+	strcat(inst, x);
+	strcat(inst, sp);
+	strcat(inst, y);
+	printf("%s\n", inst);
+	usleep(100);
+	for(i=0;i<10;i++) system(inst);
+
+	//memset(inst, NULL, sizeof(inst));
+}
 int main()
 {
 	int time = 0;
@@ -166,6 +193,7 @@ int main()
         memset(&readbuf, 0, MAXBUF);
        
         int i=0;
+	int j=0;
 	int idx=0;
 	char x[10]={0,};
 	char y[10]={0,};
@@ -184,8 +212,8 @@ int main()
 		sacledata(x);
 		sacledata(y);
 		sacledata(z);
-		printf("sa----- %s %s %s \n ",x,y,z);
-
+		//printf("sa----- %s %s %s\n ",x,y,z);
+		MoveMouse(z,x);
                 close(csock);
        
         }
