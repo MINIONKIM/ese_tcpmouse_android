@@ -4,10 +4,12 @@
 
 const gchar *state_text;
 const gchar *data_text;
-  /* this will store push buttons */
-    GtkWidget *button1;
-    GtkWidget *button2;
-    GtkWidget *button3;
+
+/* this will store push buttons */
+GtkWidget *button1;
+GtkWidget *button2;
+GtkWidget *button3;
+
 static GtkWidget *xpm_label_box( gchar *xpm_filename, gchar *label_text )
 {
     GtkWidget *box;
@@ -55,8 +57,9 @@ static void on_button1_clicked(GtkButton* button, gpointer data)
     /* cast the data back to a char*  */
     char* txt = (char*)data;
 
-     gtk_widget_set_sensitive(button1, FALSE);
-     gtk_widget_set_sensitive(button2, TRUE);
+    /*button activate*/
+    gtk_widget_set_sensitive(button1, FALSE);
+    gtk_widget_set_sensitive(button2, TRUE);
 
     printf("open_button_clicked - '%s'\n", txt);
     fflush(stdout);
@@ -67,8 +70,9 @@ static void on_button2_clicked(GtkButton* button, gpointer data)
     /* cast the data back to a char*  */
     char* txt = (char*)data;
 
+    /*button activate*/	
     gtk_widget_set_sensitive(button1, TRUE);
-     gtk_widget_set_sensitive(button2, FALSE);
+    gtk_widget_set_sensitive(button2, FALSE);
 
     printf("close_button_clicked - '%s'\n", txt);
     fflush(stdout);

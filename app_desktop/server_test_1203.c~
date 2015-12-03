@@ -48,9 +48,9 @@ void _itoa(int val, int base, char *arr)
 		}
 		
 	}
-	//printf("ascii value : %s \n", result);
+	printf("ascii value : %s \n", result);
 	cleararr(arr);
-
+	
 	for(i=0;i<strlen(result);i++) 
 	{
 	arr[i]=result[i];
@@ -124,7 +124,7 @@ void sacledata(char* arr)
 {
 	int int_arr;
 	int_arr = _atoi(arr);
-	printf("------------>%d\n",int_arr);
+	//printf("------------>%d\n",int_arr);
 	_itoa(int_arr,10,arr);
 }
 int main()
