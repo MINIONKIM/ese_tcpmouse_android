@@ -19,6 +19,7 @@ void cleararr(char buf[])
 	}
 	//printf("asd : %s",buf);
 }
+
 void _itoa(int val, int base, char *arr)
 {
 	char buf[32] = {0,};
@@ -75,25 +76,36 @@ int _atoi(char* str)
 	int radix = 0;
 	int result = 0;
 
-	if(str[0] == '-'){
+	if(str[0] == '-')
+	{
 		radix = (int)pow((double)10, (double)len-2);
+		
 		for(i=1; i<=len; i++)
 		{
 			result += (str[i] - '0') * radix;
 			radix /= 10;
 		}
 		result = 0 - result;
-	} else {
+	}
+	 else 
+	{
 		radix = (int)pow((double)10, (double)len-1);
+		
 		for(i=0; i<=len; i++)
 		{
 			result += (str[i] - '0') * radix;
 			radix /= 10;
 		}
 	}
+<<<<<<< HEAD
 	
 	return -result/50;
+=======
+
+	return result/100;
+>>>>>>> 1b41b765bde1516a47cb84de0ae72d57fdc2d660
 }
+
 void parsing(char* buf,char* x,char* y,char* z)
 {
 	int i=0;
@@ -103,6 +115,7 @@ void parsing(char* buf,char* x,char* y,char* z)
 	cleararr(y);
 	cleararr(z);
 	i=0;
+
 	while(buf[idx]!=' ')
 	{
 		x[i]=buf[idx];
@@ -111,14 +124,17 @@ void parsing(char* buf,char* x,char* y,char* z)
 	}
 	i=0;
 	idx++;
+
 	while(buf[idx]!=' ')
 	{
 		y[i]=buf[idx];
 		i++;
 		idx++;
 	}
+
 	i=0;
 	idx++;
+
 	while(buf[idx]!=' ')
 	{
 		z[i]=buf[idx];
@@ -137,6 +153,7 @@ void scaledata(char* arr)
 	_itoa(int_arr,10,arr);
 }
 
+<<<<<<< HEAD
 void MoveMouse(char* x,char* y)
 {
 	char* instruction = "xdotool mousemove_relative -- ";
@@ -154,6 +171,8 @@ void MoveMouse(char* x,char* y)
 
 	//memset(inst, NULL, sizeof(inst));
 }
+=======
+>>>>>>> 1b41b765bde1516a47cb84de0ae72d57fdc2d660
 int main()
 {
 	int time = 0;
@@ -161,6 +180,15 @@ int main()
         int clen;
         struct sockaddr_in client_addr, server_addr;
         char buf[MAXBUF] = "Im server connecting success.";
+	
+	char readbuf[MAXBUF];
+        memset(&readbuf, 0, MAXBUF);
+       
+        int i=0;
+	int idx=0;
+	char x[10]={0,};
+	char y[10]={0,};
+	char z[10]={0,};
        
         //make server socket
         if((ssock = socket(PF_INET, SOCK_STREAM, IPPROTO_TCP)) < 0)
@@ -176,7 +204,7 @@ int main()
         server_addr.sin_addr.s_addr = htonl(INADDR_ANY);
         server_addr.sin_port = htons(9999);
        
-    //binding
+       //binding
    if(bind(ssock, (struct sockaddr *)&server_addr, sizeof(server_addr)) < 0)
    {       perror("Failed to binding server socket");
            exit(1);
@@ -189,6 +217,7 @@ int main()
                exit(1);
         }
        
+<<<<<<< HEAD
         char readbuf[MAXBUF];
         memset(&readbuf, 0, MAXBUF);
        
@@ -198,6 +227,8 @@ int main()
 	char x[10]={0,};
 	char y[10]={0,};
 	char z[10]={0,};
+=======
+>>>>>>> 1b41b765bde1516a47cb84de0ae72d57fdc2d660
         while(1)
         {     csock = accept(ssock, (struct sockaddr *)&client_addr, &clen);
                i++;

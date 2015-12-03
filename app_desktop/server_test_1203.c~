@@ -55,10 +55,13 @@ void _itoa(int val, int base, char *arr)
 		}
 		
 	}
-	//printf("ascii value : %s \n", result);
+	printf("ascii value : %s \n", result);
 	cleararr(arr);
 	
+<<<<<<< HEAD
 
+=======
+>>>>>>> 1b41b765bde1516a47cb84de0ae72d57fdc2d660
 	for(i=0;i<strlen(result);i++) 
 	{
 	arr[i]=result[i];
