@@ -97,13 +97,9 @@ int _atoi(char* str)
 			radix /= 10;
 		}
 	}
-<<<<<<< HEAD
 	
 	return -result/50;
-=======
 
-	return result/100;
->>>>>>> 1b41b765bde1516a47cb84de0ae72d57fdc2d660
 }
 
 void parsing(char* buf,char* x,char* y,char* z)
@@ -153,7 +149,7 @@ void scaledata(char* arr)
 	_itoa(int_arr,10,arr);
 }
 
-<<<<<<< HEAD
+
 void MoveMouse(char* x,char* y)
 {
 	char* instruction = "xdotool mousemove_relative -- ";
@@ -171,8 +167,7 @@ void MoveMouse(char* x,char* y)
 
 	//memset(inst, NULL, sizeof(inst));
 }
-=======
->>>>>>> 1b41b765bde1516a47cb84de0ae72d57fdc2d660
+
 int main()
 {
 	int time = 0;
@@ -217,18 +212,7 @@ int main()
                exit(1);
         }
        
-<<<<<<< HEAD
-        char readbuf[MAXBUF];
-        memset(&readbuf, 0, MAXBUF);
-       
-        int i=0;
-	int j=0;
-	int idx=0;
-	char x[10]={0,};
-	char y[10]={0,};
-	char z[10]={0,};
-=======
->>>>>>> 1b41b765bde1516a47cb84de0ae72d57fdc2d660
+
         while(1)
         {     csock = accept(ssock, (struct sockaddr *)&client_addr, &clen);
                i++;
@@ -240,9 +224,9 @@ int main()
                       
                 fprintf(stderr, "[client] %s\n", readbuf);
                 parsing(readbuf,x,y,z);
-		sacledata(x);
-		sacledata(y);
-		sacledata(z);
+		scaledata(x);
+		scaledata(y);
+		scaledata(z);
 		//printf("sa----- %s %s %s\n ",x,y,z);
 		MoveMouse(z,x);
                 close(csock);
@@ -250,3 +234,5 @@ int main()
         }
         return 0;
 }
+
+
