@@ -1,2 +1,6 @@
 15.12.1 1st_connect Test -> 192.168.178.126
 	pm_20:13 _ TCP connect success
+
+
+15.12.3 gyro , mouse gyro x+ -> up , x- -> down
+	       mouse gyro z+ ->left, z- -> right
