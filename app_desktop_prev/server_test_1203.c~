@@ -216,10 +216,10 @@ int main(int argc, const char* argv[])
         server_addr.sin_port = htons(9999);
        
        //binding
-       if(bind(ssock, (struct sockaddr *)&server_addr, sizeof(server_addr)) < 0)
-       {       perror("Failed to binding server socket");
+   if(bind(ssock, (struct sockaddr *)&server_addr, sizeof(server_addr)) < 0)
+   {       perror("Failed to binding server socket");
            exit(1);
-       }
+   }
        
  
         //wait for client
