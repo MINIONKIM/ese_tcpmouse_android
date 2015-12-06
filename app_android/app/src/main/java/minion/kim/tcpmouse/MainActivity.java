@@ -9,6 +9,8 @@ import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 public class MainActivity extends Activity implements SensorEventListener {
 
@@ -23,7 +25,27 @@ public class MainActivity extends Activity implements SensorEventListener {
 
         mSensorManager = (SensorManager)getSystemService(Context.SENSOR_SERVICE);
         mGyroscope = mSensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
+
+        findViewById(R.id.buttonR).setOnClickListener(mClickListener);
+        findViewById(R.id.buttonL).setOnClickListener(mClickListener);
     }
+
+    Button.OnClickListener mClickListener = new View.OnClickListener() {
+        public void onClick(View v) {
+            String dataRight = "Right";
+            String dataLeft = "Left";
+            switch (v.getId()) {
+                case R.id.buttonR:
+                    Thread DThread = new Thread(new TCPClient(dataRight));
+                    DThread.start();
+                    break;
+                case R.id.buttonL:
+                    Thread EThread = new Thread(new TCPClient(dataLeft));
+                    EThread.start();
+                    break;
+            }
+        }
+    };
 
     public void onSensorChanged(SensorEvent event){
         Sensor sensor = event.sensor;
