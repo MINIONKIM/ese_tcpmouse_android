@@ -155,7 +155,7 @@ void scaledata(char* arr)
 void clickMouse(int _d)
 {
 	// 1 -> left 3 -> right
-	char* instruction = "xdotool click ";
+	char* instruction = "xdotool click "
 	char d[2] = {0, 0};
 	char inst[30] = {0, };
 
@@ -183,7 +183,7 @@ void MoveMouse(char* x,char* y)
 
 	//memset(inst, NULL, sizeof(inst));
 }
-
+/*
 int main(int argc, const char* argv[])
 {
 	int time = 0;
@@ -250,5 +250,5 @@ int main(int argc, const char* argv[])
         }
         return 0;
 }
-
+*/
 
