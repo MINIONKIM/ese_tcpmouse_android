@@ -7,7 +7,6 @@
 #include <arpa/inet.h>
 #include <math.h>
 
-
 #define MAXBUF 256
 
 void cleararr(char buf[])
@@ -100,18 +99,13 @@ int _atoi(char* str)
 
 }
 
-int parsing(char* buf,char* x,char* y,char* z)
+void parsing(char* buf,char* x,char* y,char* z)
 {
 	if (buf[0] == 'L')
-		{
-			clickMouse(1);
-			return 999;
-		}
+		clickMouse(1);
 	else if (buf[0] == 'R')
-		{
-			clickMouse(3);
-			return 999;
-		}		
+		clickMouse(3);
+
 	int i=0;
 	int idx=0;
 
@@ -146,7 +140,7 @@ int parsing(char* buf,char* x,char* y,char* z)
 		idx++;
 	}
 	printf("pa----- %s %s %s \n ",x,y,z);
-	return 1;
+
 }
 
 void scaledata(char* arr)
@@ -202,61 +196,53 @@ int main(int argc, const char* argv[])
 
         int i=0;
 	int idx=0;
-	int result;
 	char x[10]={0,};
 	char y[10]={0,};
 	char z[10]={0,};
-       
+
         //make server socket
         if((ssock = socket(PF_INET, SOCK_STREAM, IPPROTO_TCP)) < 0)
         {       perror("Failed to make socket discriptor");
                exit(1);
         }
-       
+
         clen = sizeof(client_addr);
-       
+
         //setting address structure
         memset(&server_addr, 0, sizeof(server_addr));
         server_addr.sin_family = AF_INET;
         server_addr.sin_addr.s_addr = htonl(INADDR_ANY);
         server_addr.sin_port = htons(9999);
-       
+
        //binding
    if(bind(ssock, (struct sockaddr *)&server_addr, sizeof(server_addr)) < 0)
    {       perror("Failed to binding server socket");
            exit(1);
    }
-       
- 
         //wait for client
         if(listen(ssock, 8) <0 )
         {       perror("listen error : ");
                exit(1);
         }
-       
 
         while(1)
         {     csock = accept(ssock, (struct sockaddr *)&client_addr, &clen);
                i++;
 	         //if(write(csock, buf, MAXBUF) <= 0)
                  //      perror("Writing error : ");
-                      
+
                if(read(csock, readbuf, MAXBUF) < 0)
                        perror("Reading error : ");
-                      
-                fprintf(stderr, "[client] %s\n", readbuf);
-                result=parsing(readbuf,x,y,z);
-		
 
-		if(result != 999){
+                fprintf(stderr, "[client] %s\n", readbuf);
+                parsing(readbuf,x,y,z);
 		scaledata(x);
 		scaledata(y);
 		scaledata(z);
 		//printf("sa----- %s %s %s\n ",x,y,z);
 		MoveMouse(z,x);
-		}
                 close(csock);
-       
+
         }
         return 0;
 }
