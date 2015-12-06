@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <gtk/gtk.h>
 
-
 #include <unistd.h>
 #include <string.h>
 #include <sys/socket.h>
@@ -10,9 +9,9 @@
 #include <arpa/inet.h>
 #include <math.h>
 
-#include <miscfuncs.h>
-#include <MouseEvent.h>
-#include <ScaleData.h>
+#include "miscfuncs.h"
+#include "MouseEvent.h"
+#include "ScaleData.h"
 
 #define MAXBUF 256
 

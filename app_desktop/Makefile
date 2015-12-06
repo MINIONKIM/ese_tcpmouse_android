@@ -1,4 +1,4 @@
-DIRS = miscfuncs MouseEvent ScaleData
+DIRS = ./lib ./app
 .PHONY: all clean
 
 all:
