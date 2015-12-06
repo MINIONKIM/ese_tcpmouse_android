@@ -4,10 +4,12 @@
 
 const gchar *state_text;
 const gchar *data_text;
-  /* this will store push buttons */
-    GtkWidget *button1;
-    GtkWidget *button2;
-    GtkWidget *button3;
+
+/* this will store push buttons */
+GtkWidget *button1;
+GtkWidget *button2;
+GtkWidget *button3;
+
 static GtkWidget *xpm_label_box( gchar *xpm_filename, gchar *label_text )
 {
     GtkWidget *box;
@@ -55,8 +57,9 @@ static void on_button1_clicked(GtkButton* button, gpointer data)
     /* cast the data back to a char*  */
     char* txt = (char*)data;
 
-     gtk_widget_set_sensitive(button1, FALSE);
-     gtk_widget_set_sensitive(button2, TRUE);
+    /*button activate*/
+    gtk_widget_set_sensitive(button1, FALSE);
+    gtk_widget_set_sensitive(button2, TRUE);
 
     printf("open_button_clicked - '%s'\n", txt);
     fflush(stdout);
@@ -67,8 +70,9 @@ static void on_button2_clicked(GtkButton* button, gpointer data)
     /* cast the data back to a char*  */
     char* txt = (char*)data;
 
+    /*button activate*/	
     gtk_widget_set_sensitive(button1, TRUE);
-     gtk_widget_set_sensitive(button2, FALSE);
+    gtk_widget_set_sensitive(button2, FALSE);
 
     printf("close_button_clicked - '%s'\n", txt);
     fflush(stdout);
@@ -95,6 +99,7 @@ int main (int argc, char *argv[])
 
     GtkWidget *label;
     GtkWidget *frame;
+	
     GtkWidget *timeLabel;
     gint tmp_pos;
 
@@ -133,8 +138,14 @@ int main (int argc, char *argv[])
     gtk_box_pack_start (GTK_BOX (hbox), vbox, FALSE, FALSE, 0);
     gtk_container_set_border_width (GTK_CONTAINER (window), 5);
 
-    frame = gtk_frame_new("STATE");
+   // frame
+    frame = gtk_frame_new("NULL");
+    gtk_frame_set_label (GTK_FRAME(frame), "STATE");
+    gtk_frame_set_label_align (GTK_FRAME (frame), 0.5, 0.0);
+    gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_ETCHED_OUT);
 
+
+ 
     //entry ..	
     entry = gtk_entry_new ();
     gtk_entry_set_max_length (GTK_ENTRY (entry), 100);
@@ -147,9 +158,16 @@ int main (int argc, char *argv[])
 				GTK_ENTRY (entry)->text_length);
     gtk_container_add (GTK_CONTAINER (frame), entry);
     gtk_box_pack_start (GTK_BOX (vbox), frame, FALSE, FALSE, 0);
+
     gtk_widget_show (entry);
 
-    frame = gtk_frame_new("DATA");
+
+      // frame
+    frame = gtk_frame_new("NULL");
+    gtk_frame_set_label (GTK_FRAME(frame), "DATA");
+    gtk_frame_set_label_align (GTK_FRAME (frame), 0.5, 0.0);
+    gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_ETCHED_OUT);
+
 
     //entry2 ..	
     entry2 = gtk_entry_new ();
