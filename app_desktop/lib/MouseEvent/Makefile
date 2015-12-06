@@ -1,4 +1,4 @@
-libMouseEvent.a : clickMouse.c MoveMouse.c
+libMouseEvent.a : clickMouse.o MoveMouse.o
 	ar rv libMouseEvent.a clickMouse.o MoveMouse.o
 clickMouse.o : clickMouse.c
 	gcc -c -g -I../../include clickMouse.c -o clickMouse.o
