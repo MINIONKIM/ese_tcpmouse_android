@@ -141,15 +141,16 @@ void on_button1_clicked(GtkButton* button, gpointer data)
                if(read(csock, readbuf, MAXBUF) < 0)
                        perror("Reading error : ");
                       
-                fprintf(stderr, "[client] %s\n", readbuf);
-                result=parsing(readbuf,x,y,z);
-		
+                fprintf(stderr, "[client]1 %s\n", readbuf);
+                //result=parsing(readbuf,x,y,z);
+		fprintf(stderr, "[client]2 %s\n", readbuf);
 		if(result == 888) clickMouse(1);
 		if(result == 999) clickMouse(3);
 		if(result != 999){
 		scaledata(x);
 		scaledata(y);
 		scaledata(z);
+		fprintf(stderr, "[client]3 %s\n", readbuf);
 		//printf("sa----- %s %s %s\n ",x,y,z);
 		MoveMouse(z,x);
 		}
@@ -214,7 +215,7 @@ int main (int argc, char *argv[])
     /* create a new window */
     window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
     gtk_window_set_title (GTK_WINDOW (window), "PC GTK Entry");
-    gtk_widget_set_size_request(GTK_WIDGET (window), 300, 250);
+    gtk_widget_set_size_request(GTK_WIDGET (window), 300, 350);
     gtk_container_set_border_width(GTK_CONTAINER (window), 5);
     gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER);
 

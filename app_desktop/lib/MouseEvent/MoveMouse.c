@@ -1,5 +1,7 @@
 #include <stdlib.h>
 #include <string.h>
+#include <stdio.h>
+
 void MoveMouse(char* x,char* y)
 {
 	char* instruction = "xdotool mousemove_relative -- ";

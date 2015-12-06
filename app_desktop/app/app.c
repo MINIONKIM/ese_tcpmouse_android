@@ -141,7 +141,7 @@ void on_button1_clicked(GtkButton* button, gpointer data)
                if(read(csock, readbuf, MAXBUF) < 0)
                        perror("Reading error : ");
                       
-                fprintf(stderr, "[client] %s\n", readbuf);
+                fprintf(stderr, "[client]1 %s\n", readbuf);
                 result=parsing(readbuf,x,y,z);
 		
 		if(result == 888) clickMouse(1);
@@ -150,6 +150,7 @@ void on_button1_clicked(GtkButton* button, gpointer data)
 		scaledata(x);
 		scaledata(y);
 		scaledata(z);
+		
 		//printf("sa----- %s %s %s\n ",x,y,z);
 		MoveMouse(z,x);
 		}

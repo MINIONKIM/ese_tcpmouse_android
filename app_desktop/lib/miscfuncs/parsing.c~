@@ -19,12 +19,14 @@ int parsing(char* buf, char* x, char* y, char* z)
         cleararr(z);
         i=0;
 
+	printf("---%s 1\n",buf);
 
         while(buf[idx]!=' '){
                 x[i]=buf[idx];
                 i++;
                 idx++;
         }
+	printf("---%s 2\n",buf);
         i=0;
         idx++;
 
@@ -33,6 +35,16 @@ int parsing(char* buf, char* x, char* y, char* z)
                 i++;
                 idx++;
         }
+	printf("---%s 3\n",buf);
+        i=0;
+        idx++;
+
+        while(buf[idx]!=' '){
+                y[i]=buf[idx];
+                i++;
+                idx++;
+        }
+	printf("---%s 4\n",buf);
         i=0;
         idx++;
 
@@ -41,6 +53,7 @@ int parsing(char* buf, char* x, char* y, char* z)
                 i++;
                 idx++;
         }
+	printf("%s 5\n",buf);
         printf("pa----- %s %s %s \n ",x,y,z);
 
 	return 1;
