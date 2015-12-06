@@ -13,3 +13,13 @@ char* itoa(int val,int base)
 	return &buf[i+1];
 }
 
+int main(int argc, char *argv[])
+{
+	char strbuf[256];
+	char* str;
+	memset(strbuf,0x00,256);
+
+	str = itoa(-234, 10);
+
+	printf("%s\n", strbuf);
+}
