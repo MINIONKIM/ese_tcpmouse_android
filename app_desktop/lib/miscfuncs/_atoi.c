@@ -4,7 +4,7 @@
 int _pow(int n)
 {
 	int i;
-	int result = 10;
+	int result = 1;
 
 	for(i=0; i<n; i++)
 	{
