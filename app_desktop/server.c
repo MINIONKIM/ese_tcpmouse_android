@@ -100,13 +100,18 @@ int _atoi(char* str)
 
 }
 
-void parsing(char* buf,char* x,char* y,char* z)
+int parsing(char* buf,char* x,char* y,char* z)
 {
 	if (buf[0] == 'L')
-		clickMouse(1);
+		{
+			clickMouse(1);
+			return 999;
+		}
 	else if (buf[0] == 'R')
-		clickMouse(3);
-
+		{
+			clickMouse(3);
+			return 999;
+		}		
 	int i=0;
 	int idx=0;
 
@@ -141,7 +146,7 @@ void parsing(char* buf,char* x,char* y,char* z)
 		idx++;
 	}
 	printf("pa----- %s %s %s \n ",x,y,z);
-
+	return 1;
 }
 
 void scaledata(char* arr)
@@ -155,7 +160,7 @@ void scaledata(char* arr)
 void clickMouse(int _d)
 {
 	// 1 -> left 3 -> right
-	char* instruction = "xdotool click "
+	char* instruction = "xdotool click ";
 	char d[2] = {0, 0};
 	char inst[30] = {0, };
 
@@ -197,6 +202,7 @@ int main(int argc, const char* argv[])
 
         int i=0;
 	int idx=0;
+	int result;
 	char x[10]={0,};
 	char y[10]={0,};
 	char z[10]={0,};
@@ -239,12 +245,16 @@ int main(int argc, const char* argv[])
                        perror("Reading error : ");
                       
                 fprintf(stderr, "[client] %s\n", readbuf);
-                parsing(readbuf,x,y,z);
+                result=parsing(readbuf,x,y,z);
+		
+
+		if(result != 999){
 		scaledata(x);
 		scaledata(y);
 		scaledata(z);
 		//printf("sa----- %s %s %s\n ",x,y,z);
 		MoveMouse(z,x);
+		}
                 close(csock);
        
         }
