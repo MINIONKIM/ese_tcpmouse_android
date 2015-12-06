@@ -214,7 +214,7 @@ int main (int argc, char *argv[])
     /* create a new window */
     window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
     gtk_window_set_title (GTK_WINDOW (window), "PC GTK Entry");
-    gtk_widget_set_size_request(GTK_WIDGET (window), 300, 250);
+    gtk_widget_set_size_request(GTK_WIDGET (window), 300, 350);
     gtk_container_set_border_width(GTK_CONTAINER (window), 5);
     gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER);
 

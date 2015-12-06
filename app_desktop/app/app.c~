@@ -303,7 +303,8 @@ int main (int argc, char *argv[])
    gtk_signal_connect (GTK_OBJECT (button2), "clicked", 
 			GTK_SIGNAL_FUNC (on_button2_clicked), NULL);
 
-
+    gtk_widget_set_sensitive(button1, TRUE);
+    gtk_widget_set_sensitive(button2, FALSE);
     gtk_widget_show(button2);
 
 
