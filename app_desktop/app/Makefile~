@@ -1,13 +1,9 @@
 CC = gcc
-CFLAGS = `pkg-config --cflags gtk+-2.0` -g -Wall -I../include -L../lib
+CFLAGS = -g -Wall -I../include -L../lib/miscfuncs -L../lib/MouseEvent
+GTKFLAGS = -export-dynamic `pkg-config --cflags --libs gtk+-2.0` 
 OUTPUT = app
-OBJFILES = app.o
 
-app : app.o
-	$(CC) -o app app.o
-
-app.o : app.c
-	$(CC) $(CFLAGS) -c app.c -o app.o -lmiscfuncs -lMouseEvent -lScaleData 
-
+app : app.c
+	$(CC) $(CFLAGS) app.c -o app -lmiscfunc -lMouseEvent  $(GTKFLAGS)
 clean:
-	rm *.o $(OUTPUT)
+	rm $(OUTPUT)

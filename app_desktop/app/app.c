@@ -11,7 +11,6 @@
 
 #include "miscfuncs.h"
 #include "MouseEvent.h"
-#include "ScaleData.h"
 
 #define MAXBUF 256
 

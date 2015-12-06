@@ -8,7 +8,7 @@ $(OUTPUT): $(OBJFILES)
 	$(AR) rv $(OUTPUT) $(OBJFILES)
 
 _atoi.o: _atoi.c
-	$(CC) $(CFLAGS) -c _atoi.c -o _atoi.o -I../../include
+	$(CC) $(CFLAGS) -c _atoi.c -o _atoi.o -lm -I../../include
 
 _itoa.o: _itoa.c
 	$(CC) $(CFLAGS) -c _itoa.c -o _itoa.o -I../../include

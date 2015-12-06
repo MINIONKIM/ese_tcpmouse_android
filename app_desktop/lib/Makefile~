@@ -1,4 +1,4 @@
-DIRS = miscfuncs MouseEvent
+DIRS = miscfuncs MouseEvent ScaleData
 .PHONY: all clean
 
 all:
