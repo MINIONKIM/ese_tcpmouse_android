@@ -2,9 +2,7 @@
 #include <stdlib.h>
 #include <gtk/gtk.h>
 
-#include "server_test_1203.h"
 
-#define MAXBUF 256
 const gchar *state_text;
 const gchar *data_text;
 
@@ -13,26 +11,8 @@ GtkWidget *button1;
 GtkWidget *button2;
 GtkWidget *button3;
 
-int buttonflag = 0;
 
 
-///////////////////////////////////////////////////
-int time = 0;
-        int ssock, csock;
-        int clen;
-        struct sockaddr_in client_addr, server_addr;
-        char buf[MAXBUF] = "Im server connecting success.";
-
-	char readbuf[MAXBUF];
-        memset(&readbuf, 0, MAXBUF);
-
-        int i=0;
-	int idx=0;
-	char x[10]={0,};
-	char y[10]={0,};
-	char z[10]={0,};
-
-/////////////////////////////////////////////////
 
 static GtkWidget *xpm_label_box( gchar *xpm_filename, gchar *label_text )
 {
@@ -85,62 +65,7 @@ static void on_button1_clicked(GtkButton* button, gpointer data)
     gtk_widget_set_sensitive(button1, FALSE);
     gtk_widget_set_sensitive(button2, TRUE);
 
-    // buttonflag : ON
-    buttonflag = 1;
-
-    while(buttonflag == 1)
-    {
-	
-       
-        //make server socket
-        if((ssock = socket(PF_INET, SOCK_STREAM, IPPROTO_TCP)) < 0)
-        {       perror("Failed to make socket discriptor");
-               exit(1);
-        }
-       
-        clen = sizeof(client_addr);
-       
-        //setting address structure
-        memset(&server_addr, 0, sizeof(server_addr));
-        server_addr.sin_family = AF_INET;
-        server_addr.sin_addr.s_addr = htonl(INADDR_ANY);
-        server_addr.sin_port = htons(9999);
-       
-       //binding
-   if(bind(ssock, (struct sockaddr *)&server_addr, sizeof(server_addr)) < 0)
-   {       perror("Failed to binding server socket");
-           exit(1);
-   }
-       
- 
-        //wait for client
-        if(listen(ssock, 8) <0 )
-        {       perror("listen error : ");
-               exit(1);
-        }
-       
-
-        while(1)
-        {     csock = accept(ssock, (struct sockaddr *)&client_addr, &clen);
-               i++;
-	         //if(write(csock, buf, MAXBUF) <= 0)
-                 //      perror("Writing error : ");
-                      
-               if(read(csock, readbuf, MAXBUF) < 0)
-                       perror("Reading error : ");
-                      
-                fprintf(stderr, "[client] %s\n", readbuf);
-                parsing(readbuf,x,y,z);
-		scaledata(x);
-		scaledata(y);
-		scaledata(z);
-		//printf("sa----- %s %s %s\n ",x,y,z);
-		MoveMouse(z,x);
-                close(csock);
-       
-        }
-    }
-
+   
     printf("open_button_clicked - '%s'\n", txt);
     fflush(stdout);
 }
@@ -155,8 +80,6 @@ static void on_button2_clicked(GtkButton* button, gpointer data)
     gtk_widget_set_sensitive(button2, FALSE);
 
 
-    // buttonflag : OFF
-    buttonflag = 0;
 
     printf("close_button_clicked - '%s'\n", txt);
     fflush(stdout);

@@ -4,6 +4,7 @@
 
 #include "server_test_1203.h"
 
+#define MAXBUF 256
 const gchar *state_text;
 const gchar *data_text;
 
