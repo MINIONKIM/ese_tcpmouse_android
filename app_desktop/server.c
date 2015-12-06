@@ -155,7 +155,7 @@ void scaledata(char* arr)
 void clickMouse(int _d)
 {
 	// 1 -> left 3 -> right
-	char* instruction = "xdotool click "
+	char* instruction = "xdotool click ";
 	char d[2] = {0, 0};
 	char inst[30] = {0, };
 
