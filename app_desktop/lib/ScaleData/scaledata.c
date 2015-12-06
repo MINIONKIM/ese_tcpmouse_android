@@ -1,5 +1,7 @@
 #include <stdlib.h>
 #include <string.h>
+#include "miscfuncs.h"
+
 void clickMouse(int _d)
 {
 	// 1 -> left 3 -> right
