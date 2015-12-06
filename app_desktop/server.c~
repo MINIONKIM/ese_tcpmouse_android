@@ -104,12 +104,12 @@ int parsing(char* buf,char* x,char* y,char* z)
 {
 	if (buf[0] == 'L')
 		{
-			//clickMouse(1);
-			return 888;
+			clickMouse(1);
+			return 999;
 		}
 	else if (buf[0] == 'R')
 		{
-			//clickMouse(3);
+			clickMouse(3);
 			return 999;
 		}		
 	int i=0;
@@ -247,8 +247,7 @@ int main(int argc, const char* argv[])
                 fprintf(stderr, "[client] %s\n", readbuf);
                 result=parsing(readbuf,x,y,z);
 		
-		if(result == 888) clickMouse(1);
-		if(result == 999) clickMouse(3);
+
 		if(result != 999){
 		scaledata(x);
 		scaledata(y);
