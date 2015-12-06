@@ -10,9 +10,9 @@
 #include <arpa/inet.h>
 #include <math.h>
 
-#include <miscfuncs.h>
-#include <MouseEvent.h>
-#include <ScaleData.h>
+//#include <miscfuncs.h>
+//#include <MouseEvent.h>
+//#include <ScaleData.h>
 
 #define MAXBUF 256
 

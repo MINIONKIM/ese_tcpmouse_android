@@ -10,10 +10,6 @@
 #include <arpa/inet.h>
 #include <math.h>
 
-#include <miscfuncs.h>
-#include <MouseEvent.h>
-#include <ScaleData.h>
-
 #define MAXBUF 256
 
 
@@ -29,11 +25,12 @@ GtkWidget *button3;
 //////////  server  ////////////////////////////
 int buttonflag = 0;
 
+//int time = 0;
 int ssock, csock;
 int clen;
 
 struct sockaddr_in client_addr, server_addr;
-char buf[MAXBUF] = "I'm server connecting success.";
+char buf[MAXBUF] = "Im server connecting success.";
 
 char readbuf[MAXBUF];
 
@@ -44,10 +41,10 @@ int result;
 char x[10]={0,};
 char y[10]={0,};
 char z[10]={0,};
+//////////////////////////////////////////////////
 
 
-
-GtkWidget *xpm_label_box( gchar *xpm_filename, gchar *label_text )
+static GtkWidget *xpm_label_box( gchar *xpm_filename, gchar *label_text )
 {
     GtkWidget *box;
     GtkWidget *label;
@@ -73,7 +70,7 @@ GtkWidget *xpm_label_box( gchar *xpm_filename, gchar *label_text )
     return box;
 }
 
-void enter1_callback (GtkWidget *widget, GtkWidget *entry)
+static void enter1_callback (GtkWidget *widget, GtkWidget *entry)
 {
 	state_text = gtk_entry_get_text (GTK_ENTRY(entry));
 	printf("Entry contents : %s\n", state_text);
@@ -81,7 +78,7 @@ void enter1_callback (GtkWidget *widget, GtkWidget *entry)
 	return;
 }
 
-void enter2_callback (GtkWidget *widget, GtkWidget *entry)
+static void enter2_callback (GtkWidget *widget, GtkWidget *entry)
 {
 	data_text = gtk_entry_get_text (GTK_ENTRY(entry));
 	printf("Entry contents : %s\n", data_text);
@@ -89,7 +86,7 @@ void enter2_callback (GtkWidget *widget, GtkWidget *entry)
 	return;
 }
 
-void on_button1_clicked(GtkButton* button, gpointer data)
+static void on_button1_clicked(GtkButton* button, gpointer data)
 {
     /* cast the data back to a char*  */
     char* txt = (char*)data;
@@ -102,7 +99,7 @@ void on_button1_clicked(GtkButton* button, gpointer data)
 
     while(buttonflag == 1)
     {
-         memset(&readbuf, 0, MAXBUF);
+       memset(&readbuf, 0, MAXBUF);
 
 	 //make server socket
         if((ssock = socket(PF_INET, SOCK_STREAM, IPPROTO_TCP)) < 0)
@@ -114,18 +111,17 @@ void on_button1_clicked(GtkButton* button, gpointer data)
        
         //setting address structure
         memset(&server_addr, 0, sizeof(server_addr));
-
         server_addr.sin_family = AF_INET;
         server_addr.sin_addr.s_addr = htonl(INADDR_ANY);
         server_addr.sin_port = htons(9999);
        
        //binding
-       if(bind(ssock, (struct sockaddr *)&server_addr, sizeof(server_addr)) < 0)
-       {       perror("Failed to binding server socket");
-              exit(1);
-       }
+   if(bind(ssock, (struct sockaddr *)&server_addr, sizeof(server_addr)) < 0)
+   {       perror("Failed to binding server socket");
+           exit(1);
+   }
        
-
+ 
         //wait for client
         if(listen(ssock, 8) <0 )
         {       perror("listen error : ");
@@ -134,8 +130,7 @@ void on_button1_clicked(GtkButton* button, gpointer data)
        
 
         while(1)
-        {    
-		 csock = accept(ssock, (struct sockaddr *)&client_addr, &clen);
+        {     csock = accept(ssock, (struct sockaddr *)&client_addr, &clen);
                i++;
 	         //if(write(csock, buf, MAXBUF) <= 0)
                  //      perror("Writing error : ");
@@ -157,14 +152,14 @@ void on_button1_clicked(GtkButton* button, gpointer data)
 		}
                 close(csock);
        
-         }
+        }
     } 
    
-    printf("open_button_clicked - '%s'\n", buf);
+    printf("open_button_clicked - '%s'\n", txt);
     fflush(stdout);
 }
 
-void on_button2_clicked(GtkButton* button, gpointer data)
+static void on_button2_clicked(GtkButton* button, gpointer data)
 {
     /* cast the data back to a char*  */
     char* txt = (char*)data;
@@ -182,7 +177,7 @@ void on_button2_clicked(GtkButton* button, gpointer data)
 }
 
 /* "quit" button "clicked" callback function. */
-void on_quit_clicked(GtkButton* button, gpointer data)
+static void on_quit_clicked(GtkButton* button, gpointer data)
 {
     /* make sure we realy quit. */
     gtk_main_quit();
@@ -216,7 +211,7 @@ int main (int argc, char *argv[])
     /* create a new window */
     window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
     gtk_window_set_title (GTK_WINDOW (window), "PC GTK Entry");
-    gtk_widget_set_size_request(GTK_WIDGET (window), 300, 350);
+    gtk_widget_set_size_request(GTK_WIDGET (window), 200, 350);
     gtk_container_set_border_width(GTK_CONTAINER (window), 5);
     gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER);
 
@@ -232,10 +227,10 @@ int main (int argc, char *argv[])
 
 // ----------------------------------------------------------------------------
     //vbox
-    vbox = gtk_vbox_new (FALSE, 15);
+    vbox = gtk_vbox_new (FALSE, 5);
   
    // hbox
-    hbox = gtk_hbox_new (FALSE, 15);
+    hbox = gtk_hbox_new (FALSE, 5);
   
     gtk_container_add (GTK_CONTAINER (window), hbox);
     gtk_box_pack_start (GTK_BOX (hbox), vbox, FALSE, FALSE, 0);
@@ -289,9 +284,17 @@ int main (int argc, char *argv[])
    
     //button ...
     button1 = gtk_button_new_with_label("Open");
+   
+
+    //gtk_signal_connect_object (GTK_OBJECT (button), "clicked", 
+	//	GTK_SIGNAL_FUNC (gtk_widget_destory), 
+	//	GTK_OBJECT (window));
+    
+    //gtk_container_add (GTK_CONTAINER (window), button1);
     gtk_widget_set_size_request(button1, 50, 50);
     gtk_box_pack_start (GTK_BOX (vbox), button1, FALSE, TRUE, 1);
     
+
     gtk_signal_connect (GTK_OBJECT (button1), "clicked", 
 		GTK_SIGNAL_FUNC (on_button1_clicked), NULL);
 
@@ -305,9 +308,10 @@ int main (int argc, char *argv[])
    gtk_signal_connect (GTK_OBJECT (button2), "clicked", 
 			GTK_SIGNAL_FUNC (on_button2_clicked), NULL);
 
+	// test
+   gtk_widget_set_sensitive(button2, FALSE);
 
     gtk_widget_show(button2);
-
 
    // button3
    button3 = gtk_button_new_with_label("Quit");  
