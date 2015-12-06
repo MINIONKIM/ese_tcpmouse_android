@@ -9,6 +9,8 @@
 #include <arpa/inet.h>
 #include <math.h>
 
+#include <pthread.h>
+
 #include "miscfuncs.h"
 #include "MouseEvent.h"
 
@@ -23,6 +25,9 @@ GtkWidget *button1;
 GtkWidget *button2;
 GtkWidget *button3;
 
+/* this will store a text entry */
+GtkWidget *entry;
+GtkWidget *entry2;  
 
 //////////  server  ////////////////////////////
 int buttonflag = 0;
@@ -43,33 +48,11 @@ char x[10]={0,};
 char y[10]={0,};
 char z[10]={0,};
 
+int saveX, saveY, saveZ;
 
+pthread_t mythread;
+int result;
 
-GtkWidget *xpm_label_box( gchar *xpm_filename, gchar *label_text )
-{
-    GtkWidget *box;
-    GtkWidget *label;
-    GtkWidget *image;
-
-    /* Create box for image and label */
-    box = gtk_hbox_new (FALSE, 0);
-    gtk_container_set_border_width (GTK_CONTAINER (box), 2);
-
-    /* Now on to the image stuff */
-    image = gtk_image_new_from_file (xpm_filename);
-
-    /* Create a label for the button */
-    label = gtk_label_new (label_text);
-
-    /* Pack the image and label into the box */
-    gtk_box_pack_start (GTK_BOX (box), image, FALSE, FALSE, 3);
-    gtk_box_pack_start (GTK_BOX (box), label, FALSE, FALSE, 3);
-
-    gtk_widget_show (image);
-    gtk_widget_show (label);
-
-    return box;
-}
 
 void enter1_callback (GtkWidget *widget, GtkWidget *entry)
 {
@@ -87,20 +70,10 @@ void enter2_callback (GtkWidget *widget, GtkWidget *entry)
 	return;
 }
 
-void on_button1_clicked(GtkButton* button, gpointer data)
+
+void *serverThread (void *arg)
 {
-    /* cast the data back to a char*  */
-    char* txt = (char*)data;
-
-    /*button activate*/
-    gtk_widget_set_sensitive(button1, FALSE);
-    gtk_widget_set_sensitive(button2, TRUE);
-
-    buttonflag = 1;
-
-    while(buttonflag == 1)
-    {
-         memset(&readbuf, 0, MAXBUF);
+	memset(&readbuf, 0, MAXBUF);
 
 	 //make server socket
         if((ssock = socket(PF_INET, SOCK_STREAM, IPPROTO_TCP)) < 0)
@@ -156,9 +129,30 @@ void on_button1_clicked(GtkButton* button, gpointer data)
                 close(csock);
        
          }
-    } 
+
+}
+
+void on_button1_clicked(GtkButton* button, gpointer data)
+{
+    /* cast the data back to a char*  */
+    char* txt = (char*)data;
+
+    /*button activate*/
+    gtk_widget_set_sensitive(button1, FALSE);
+    gtk_widget_set_sensitive(button2, TRUE);
+
+    buttonflag = 1;
+
+    if(buttonflag == 1)
+    {
+	result = pthread_create(&mythread, NULL, serverThread, NULL);
+    }
    
     printf("open_button_clicked - '%s'\n", buf);
+
+    gtk_entry_set_text (GTK_ENTRY (entry), "Connecting success!!");
+    //gtk_entry_set_text (GTK_ENTRY (entry2), " ??");   //whhhhh
+
     fflush(stdout);
 }
 
@@ -191,9 +185,7 @@ int main (int argc, char *argv[])
     /* this variable will store a pointer to the window object. */
     GtkWidget *window;
     GtkWidget *vbox;
-    /* this will store a text entry */
-    GtkWidget *entry;
-    GtkWidget *entry2;   
+   
   
     /* this will store a horizontal box*/
     GtkWidget *hbox;
@@ -203,6 +195,7 @@ int main (int argc, char *argv[])
 	
     GtkWidget *timeLabel;
     gint tmp_pos;
+
 
 // ----------------------------------------------------------------------------
 
@@ -214,7 +207,7 @@ int main (int argc, char *argv[])
     /* create a new window */
     window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
     gtk_window_set_title (GTK_WINDOW (window), "PC GTK Entry");
-    gtk_widget_set_size_request(GTK_WIDGET (window), 300, 350);
+    gtk_widget_set_size_request(GTK_WIDGET (window), 240, 380);
     gtk_container_set_border_width(GTK_CONTAINER (window), 5);
     gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER);
 

@@ -4,6 +4,6 @@ GTKFLAGS = -export-dynamic `pkg-config --cflags --libs gtk+-2.0`
 OUTPUT = app
 
 app : app.c
-	$(CC) $(CFLAGS) app.c -o app -lmiscfunc -lMouseEvent  $(GTKFLAGS)
+	$(CC) $(CFLAGS) app.c -o app -lmiscfunc -lMouseEvent $(GTKFLAGS) -pthread
 clean:
 	rm $(OUTPUT)
