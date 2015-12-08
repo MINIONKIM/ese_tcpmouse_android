@@ -152,7 +152,7 @@ void on_button1_clicked(GtkButton* button, gpointer data)
     printf("open_button_clicked - '%s'\n", buf);
 
     gtk_entry_set_text (GTK_ENTRY (entry), "Connecting success!!");
-    //gtk_entry_set_text (GTK_ENTRY (entry2), " ??");   //whhhhh
+    gtk_entry_set_text (GTK_ENTRY (entry2), "Data transimition!!");  
 
     fflush(stdout);
 }
@@ -166,6 +166,9 @@ void on_button2_clicked(GtkButton* button, gpointer data)
     gtk_widget_set_sensitive(button1, TRUE);
     gtk_widget_set_sensitive(button2, FALSE);
 
+
+    gtk_entry_set_text (GTK_ENTRY (entry), "Disconnect"); 
+    gtk_entry_set_text (GTK_ENTRY (entry2), "Waiting data..");
 
    buttonflag = 0;
 
@@ -269,7 +272,7 @@ int main (int argc, char *argv[])
     gtk_entry_set_max_length (GTK_ENTRY (entry2), 100);
      gtk_widget_set_size_request(entry2, 170, 50);
     g_signal_connect (entry2, "activate",G_CALLBACK (enter2_callback), entry2);
-    gtk_entry_set_text (GTK_ENTRY (entry2), "What data");
+    gtk_entry_set_text (GTK_ENTRY (entry2), "Waiting data..");
 
     tmp_pos = GTK_ENTRY (entry2)->text_length;
     gtk_editable_select_region (GTK_EDITABLE (entry2),0, 
